@@ -1,0 +1,36 @@
+ChatKeep — Naufal adalah aplikasi utilitas cerdas yang membantu Anda membaca pesan masuk yang ditarik atau dihapus oleh pengirim, mencadangkan lampiran media (foto, video, dan pesan suara), serta menyimpan status WhatsApp langsung ke galeri ponsel Anda — 100% offline dan privat.
+
+Pernahkah Anda merasa penasaran ketika teman Anda menghapus pesan sebelum Anda sempat membacanya? Dengan ChatKeep, Anda tidak akan lagi melewatkan pesan penting!
+
+🌟 FITUR UTAMA CHATKEEP:
+
+1. PEMULIHAN PESAN TERHAPUS (ANTI-DELETE)
+• Mencatat teks percakapan masuk secara otomatis secara real-time.
+• Mendeteksi ketika pengirim menarik pesannya ("Pesan ini telah dihapus") dan menandainya dengan badge jelas di daftar obrolan Anda.
+• Mendukung pesan teks panjang tanpa terpotong.
+
+2. PENYELAMAT MEDIA TERHAPUS (FOTO, VIDEO & VOICE NOTE)
+• Mengamankan salinan gambar dan rekaman suara dari notifikasi ke penyimpanan privat aplikasi sebelum dihapus oleh pengirim.
+• Pemutar pesan suara / audio bawaan (Built-in Audio Player) langsung di dalam ruang chat.
+
+3. WHATSAPP STATUS SAVER (1-KLIK KE GALERI)
+• Tonton dan simpan foto serta video status WhatsApp kontak Anda dengan satu ketukan.
+• Tersimpan otomatis ke folder publik HP (Pictures/ChatKeep & Movies/ChatKeep) sehingga langsung muncul di Galeri foto Anda.
+• Kompatibel penuh dengan aturan Scoped Storage di Android 11, 12, 13, 14, hingga Android 15.
+
+4. DUKUNGAN BANYAK APLIKASI PERPESANAN
+• Mendukung WhatsApp, WhatsApp Business, Instagram Direct, Telegram, Facebook Messenger, dan LINE.
+• Opsi "Pantau Semua" untuk mencadangkan notifikasi dari aplikasi chat lainnya.
+
+5. 100% PRIVAT & OFFLINE-FIRST
+• Privasi Anda adalah prioritas mutlak kami.
+• Tidak ada server eksternal, tidak ada analitik, tidak ada pelacakan data, dan tidak ada pengiriman data ke internet.
+• Seluruh riwayat percakapan tersimpan aman di database lokal HP Anda sendiri.
+
+6. PEMBERSIHAN OTOMATIS (AUTO-CLEAN)
+• Atur retensi penyimpanan otomatis: hapus pesan lama setelah 7 hari, 14 hari, 30 hari, atau simpan selamanya agar memori HP tetap lega.
+
+---
+
+PENAFIAN (DISCLAIMER):
+Aplikasi ChatKeep — Naufal adalah alat utilitas independen untuk pengarsipan notifikasi lokal dan tidak berafiliasi, disponsori, atau didukung oleh WhatsApp LLC, Instagram, Telegram, atau Meta Platforms, Inc. Nama "WhatsApp", "Instagram", dan merek terkait lainnya adalah hak cipta dari pemiliknya masing-masing. ChatKeep tidak mengumpulkan atau membagikan data pribadi apa pun ke pihak ketiga.

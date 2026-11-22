@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi - ChatKeep — Naufal</title>
+    <style>
+        :root {
+            --primary: #0F766E;
+            --accent: #2DD4BF;
+            --bg: #090D16;
+            --surface: #111827;
+            --text: #F8FAFC;
+            --text-secondary: #94A3B8;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #1E293B;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(45, 212, 191, 0.15);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        h1 { margin: 0 0 10px 0; color: #FFFFFF; font-size: 28px; }
+        h2 { color: var(--accent); margin-top: 30px; font-size: 20px; border-bottom: 1px solid #1E293B; padding-bottom: 8px; }
+        p, li { color: var(--text-secondary); font-size: 15px; }
+        ul { padding-left: 20px; }
+        .card {
+            background: var(--surface);
+            border: 1px solid #1E293B;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #1E293B;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="badge">100% OFFLINE-FIRST PRIVACY</span>
+            <h1>Kebijakan Privasi (Privacy Policy)</h1>
+            <p><strong>ChatKeep — Naufal</strong> • Tanggal Berlaku: 22 November 2026</p>
+        </div>
+
+        <div class="card">
+            <h2>1. Gambaran Umum & Prinsip Privasi</h2>
+            <p><strong>ChatKeep — Naufal</strong> ("Aplikasi") adalah aplikasi utilitas Android yang beroperasi dengan prinsip <em>offline-first</em>. Aplikasi dirancang untuk mencadangkan notifikasi pesan masuk secara lokal, menyelamatkan media yang terhapus, dan menyimpan status WhatsApp. <strong>Kami tidak mengumpulkan, tidak mengirimkan, tidak menyimpan, dan tidak membagikan data percakapan maupun informasi pribadi Anda ke server eksternal mana pun.</strong></p>
+
+            <h2>2. Izin yang Digunakan & Tujuannya</h2>
+            <ul>
+                <li><strong>Akses Notifikasi (NotificationListenerService):</strong> Digunakan semata-mata untuk membaca teks notifikasi masuk dari aplikasi perpesanan yang dipilih dan menyimpannya di database SQLite internal perangkat pengguna.</li>
+                <li><strong>Layanan Latar Depan (Foreground Service):</strong> Menjaga layanan pencadangan lokal tetap aktif di latar belakang agar pesan yang ditarik pengirim tetap dapat tersimpan.</li>
+                <li><strong>Akses Penyimpanan (Storage Access Framework / SAF & MediaStore):</strong> Digunakan untuk membaca folder status WhatsApp atas izin eksplisit pengguna serta menyimpan status terpilih ke galeri publik ponsel.</li>
+            </ul>
+
+            <h2>3. Penyimpanan & Retensi Data</h2>
+            <p>Seluruh riwayat obrolan, nama pengirim, stempel waktu, dan salinan gambar tersimpan 100% di penyimpanan internal pribadi ponsel Anda. Pengguna memiliki kendali penuh untuk:</p>
+            <ul>
+                <li>Menghapus riwayat percakapan per kontak kapan saja.</li>
+                <li>Mengatur jadwal pembersihan otomatis (Auto-Clean) setelah 7, 14, atau 30 hari.</li>
+                <li>Menghapus (uninstall) aplikasi akan secara permanen melenyapkan seluruh arsip pesan tanpa jejak.</li>
+            </ul>
+
+            <h2>4. Tidak Ada Pihak Ketiga (No Third-Party SDKs)</h2>
+            <p>Aplikasi ini bebas dari SDK analitik pihak ketiga, pelacak perilaku pengguna, dan jaringan periklanan yang memiliki akses ke data percakapan Anda.</p>
+
+            <h2>5. Penafian Merek Dagang (Trademark Disclaimer)</h2>
+            <p>ChatKeep — Naufal adalah aplikasi independen dan sama sekali tidak berafiliasi, disponsori, atau didukung oleh WhatsApp LLC, Instagram, Telegram, atau Meta Platforms, Inc.</p>
+
+            <h2>6. Kontak Pengembang</h2>
+            <p>Jika Anda memiliki pertanyaan mengenai Kebijakan Privasi ini, silakan hubungi pengembang di: <strong>admin@naufalputra.my.id</strong></p>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 ChatKeep — Naufal. Hak Cipta Dilindungi.
+        </div>
+    </div>
+</body>
+</html>
