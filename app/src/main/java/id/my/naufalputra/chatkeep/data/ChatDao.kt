@@ -14,6 +14,13 @@ interface ChatDao {
     @Query("SELECT * FROM chat_messages WHERE senderName = :sender AND packageName = :pkg ORDER BY timestamp ASC")
     fun getMessagesByThread(sender: String, pkg: String): Flow<List<ChatMessageEntity>>
 
+    // Mengambil semua pesan yang memiliki lampiran media (foto, video, suara)
+    @Query("SELECT * FROM chat_messages WHERE mediaUri IS NOT NULL ORDER BY timestamp DESC")
+    fun getAllMediaMessages(): Flow<List<ChatMessageEntity>>
+
+    @Query("SELECT * FROM chat_messages WHERE mediaType = :type ORDER BY timestamp DESC")
+    fun getMediaByType(type: String): Flow<List<ChatMessageEntity>>
+
     // Menandai pesan terakhir dari pengirim sebagai "Dihapus"
     @Query("""
         UPDATE chat_messages 

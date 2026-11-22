@@ -64,6 +64,12 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
 
+    // Coil (Image & Media Loading in Compose)
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
+    // DocumentFile (Storage Access Framework for WhatsApp Media & Status Saver)
+    implementation("androidx.documentfile:documentfile:1.0.1")
+
     // WorkManager (Auto-Clean)
     implementation("androidx.work:work-runtime-ktx:2.10.0")
 

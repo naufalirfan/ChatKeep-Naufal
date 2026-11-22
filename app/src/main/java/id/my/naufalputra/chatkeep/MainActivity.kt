@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Jadwalkan pembersihan otomatis sesuai pengaturan tersimpan (default 30 hari)
+        // Jadwalkan pembersihan otomatis sesuai preferensi pengguna (default 30 hari)
         val prefs = getSharedPreferences("chatkeep_prefs", Context.MODE_PRIVATE)
         val savedDays = prefs.getInt("auto_clean_days", 30)
         if (savedDays > 0) {
@@ -55,10 +55,16 @@ fun ChatKeepApp(viewModel: ChatViewModel = viewModel()) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    // 1. Permintaan Izin Runtime POST_NOTIFICATIONS untuk Android 13 (API 33) ke atas
+    // 1. Permintaan Izin Runtime Notifikasi (Android 13+)
     val notificationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { /* Status izin ditangani oleh sistem */ }
+    )
+
+    // 2. Permintaan Izin Media (Untuk membaca media jika diperlukan)
+    val mediaPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+        onResult = { /* Status ditangani sistem */ }
     )
 
     LaunchedEffect(Unit) {
@@ -71,15 +77,26 @@ fun ChatKeepApp(viewModel: ChatViewModel = viewModel()) {
             if (!isGranted) {
                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
+
+            // Minta izin baca media foto & video
+            mediaPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.READ_MEDIA_VIDEO,
+                    Manifest.permission.READ_MEDIA_AUDIO
+                )
+            )
+        } else {
+            mediaPermissionLauncher.launch(
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+            )
         }
     }
 
-    // 2. State Data & Navigasi
-    val allMessages by viewModel.allMessages.collectAsStateWithLifecycle()
+    // State navigasi thread
     var selectedThread by remember { mutableStateOf<Pair<String, String>?>(null) }
-    var showSettings by remember { mutableStateOf(false) }
 
-    // 3. Refresh status izin NotificationListener saat kembali ke aplikasi (ON_RESUME)
+    // Trigger refresh status izin saat kembali ke foreground
     var resumeTrigger by remember { mutableIntStateOf(0) }
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
@@ -93,40 +110,33 @@ fun ChatKeepApp(viewModel: ChatViewModel = viewModel()) {
         }
     }
 
-    // 4. Routing Layar
-    when {
-        showSettings -> {
-            BackHandler { showSettings = false }
-            SettingsScreen(onBack = { showSettings = false })
-        }
-        selectedThread != null -> {
-            val (senderName, packageName) = selectedThread!!
-            val threadMessages by viewModel
-                .getThreadMessages(senderName, packageName)
-                .collectAsStateWithLifecycle(initialValue = emptyList())
+    // Routing Layar: Detail Thread vs Main Tab Scaffold
+    val currentThread = selectedThread
+    if (currentThread != null) {
+        val (senderName, packageName) = currentThread
+        val threadMessages by viewModel
+            .getThreadMessages(senderName, packageName)
+            .collectAsStateWithLifecycle(initialValue = emptyList())
 
-            BackHandler { selectedThread = null }
+        BackHandler { selectedThread = null }
 
-            ChatDetailScreen(
-                senderName = senderName,
-                messages = threadMessages,
-                onBack = { selectedThread = null },
-                onDeleteThread = {
-                    viewModel.deleteThread(senderName, packageName)
-                    selectedThread = null
+        ChatDetailScreen(
+            senderName = senderName,
+            messages = threadMessages,
+            onBack = { selectedThread = null },
+            onDeleteThread = {
+                viewModel.deleteThread(senderName, packageName)
+                selectedThread = null
+            }
+        )
+    } else {
+        key(resumeTrigger) {
+            MainTabScaffold(
+                viewModel = viewModel,
+                onThreadClick = { sender, pkg ->
+                    selectedThread = sender to pkg
                 }
             )
-        }
-        else -> {
-            key(resumeTrigger) {
-                ChatKeepDashboardScreen(
-                    messages = allMessages,
-                    onThreadClick = { sender, pkg ->
-                        selectedThread = sender to pkg
-                    },
-                    onOpenSettings = { showSettings = true }
-                )
-            }
         }
     }
 }
