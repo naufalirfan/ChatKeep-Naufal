@@ -1,0 +1,77 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Debug & Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+          cache-disabled: false
+
+      - name: Grant execute permission for gradlew (if present)
+        if: hashFiles('gradlew') != ''
+        run: chmod +x gradlew
+
+      - name: Assemble Debug APK
+        run: gradle assembleDebug --no-daemon --stacktrace
+
+      - name: Assemble Release APK (unsigned)
+        run: gradle assembleRelease --no-daemon --stacktrace
+
+      - name: Sign Release APK (if keystore secrets are provided)
+        if: env.SIGNING_KEY_BASE64 != ''
+        env:
+          SIGNING_KEY_BASE64: ${{ secrets.SIGNING_KEY_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          echo "$SIGNING_KEY_BASE64" | base64 -d > /tmp/release.keystore
+          find app/build/outputs/apk/release -name '*.apk' | while read apk; do
+            /usr/bin/sdkmanager --list 2>/dev/null || true
+            BUILD_TOOLS=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)
+            "${BUILD_TOOLS}/apksigner" sign \
+              --ks /tmp/release.keystore \
+              --ks-pass "pass:${KEYSTORE_PASSWORD}" \
+              --ks-key-alias "${KEY_ALIAS}" \
+              --key-pass "pass:${KEY_PASSWORD}" \
+              --out "${apk%.apk}-signed.apk" \
+              "$apk"
+          done
+          rm /tmp/release.keystore
+
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: |
+            app/build/outputs/apk/release/*-signed.apk
+            app/build/outputs/apk/release/*.apk
+          if-no-files-found: warn

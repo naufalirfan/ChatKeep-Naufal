@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#0F766E"/>
+  <!-- Chat Bubble Outer -->
+  <path d="M256 100 C156 100 76 175 76 268 C76 306 89 341 113 370 L93 448 L174 424 C199 433 227 436 256 436 C356 436 436 361 436 268 C436 175 356 100 256 100 Z" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Privacy Shield Inner -->
+  <path d="M256 180 L186 212 V262 C186 310 216 354 256 366 C296 354 326 310 326 262 V212 Z" fill="#2DD4BF" opacity="0.9"/>
+  <path d="M256 195 L200 220 V260 C200 298 224 334 256 345 C288 334 312 298 312 260 V220 Z" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linejoin="round"/>
+</svg>
