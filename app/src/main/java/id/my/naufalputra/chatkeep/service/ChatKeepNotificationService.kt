@@ -8,6 +8,7 @@ import android.os.Build
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
+import id.my.naufalputra.chatkeep.R
 import id.my.naufalputra.chatkeep.data.ChatDao
 import id.my.naufalputra.chatkeep.data.ChatDatabase
 import id.my.naufalputra.chatkeep.data.ChatMessageEntity
@@ -60,7 +61,7 @@ class ChatKeepNotificationService : NotificationListenerService() {
         val notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle("ChatKeep — Naufal Aktif")
             .setContentText("Mencadangkan notifikasi secara lokal di perangkat")
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setSmallIcon(R.drawable.ic_notif)
             .setOngoing(true)
             .setPriority(NotificationCompat.PRIORITY_MIN)
             .build()
